@@ -1,5 +1,5 @@
 # AI-Real-State-Agent
-# Real Estate Price Prediction using Amazon SageMaker Canvas
+# Predicción de precios para Real State con Amazon SageMaker Canvas
 
 Este proyecto ha sido desarrollado como parte de la Especialización en Cloud Computing. Consiste en la implementación de una solución de Machine Learning no-code mediante la plataforma Amazon SageMaker Canvas, orientada a la predicción de precios en el sector inmobiliario a partir de variables sociodemográficas, económicas y geográficas.
 
