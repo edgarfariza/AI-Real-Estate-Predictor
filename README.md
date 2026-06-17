@@ -31,5 +31,4 @@ Para una empresa del sector inmobiliario, disponer de este modelo tiene una util
 
 ---
 
-## Limpieza de Recursos (Gobernanza Cloud)
-Como buena práctica de administración en la nube para el control de costes y optimización de recursos, se documenta la detención de las instancias de Canvas y la desconexión del dominio para evitar el consumo de créditos o facturaciones innecesarias en la cuenta de AWS.
+
