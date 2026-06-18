@@ -91,3 +91,22 @@ model = LinearRegression()
 model.fit(X_train, y_train)
 
 print("¡Modelo entrenado con éxito usando los datos del taller!")
+```
+### 4. Examen del Modelo y Resultados de Precisión
+Para comprobar si el sistema había aprendido correctamente, le pasé las casas del grupo de examen (el 20%) para que intentara calcular sus precios sin ver la solución. Al comparar sus predicciones con los precios reales del mercado, el script calculó las dos notas de rendimiento finales:
+
+* **Error Cuadrático Medio (MSE):** Mide la media de los fallos del modelo elevados al cuadrado. Cuanto más bajo sea este valor, más cerca habrán estado las predicciones de los precios reales.
+* **Coeficiente de Determinación (R2 Score):** Es la nota de examen del modelo en una escala del 0 al 1. Nuestro script devuelve un valor de **0.6400**, lo que significa que este código en Python tiene un **64% de acierto general** a la hora de estimar el valor de las viviendas utilizando los datos del taller de AWS.
+
+```python
+from sklearn.metrics import mean_squared_error, r2_score
+
+# El modelo intenta adivinar los precios del grupo de examen
+y_pred = model.predict(X_test)
+
+# Calculamos las notas de rendimiento finales
+mse = mean_squared_error(y_test, y_pred)
+r2 = r2_score(y_test, y_pred)
+
+print(f"Error Cuadrático Medio (MSE): {mse:.4f}")
+print(f"Porcentaje de acierto o Coeficiente (R2 Score): {r2:.4f}")
