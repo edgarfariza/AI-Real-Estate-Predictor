@@ -30,13 +30,14 @@ pip install -r requirements.txt
 jupyter notebook notebook/prediccion_viviendas.ipynb
 ```
 
-## Próximos Pasos
+## 🚀 Próximos Pasos (Lo que se viene este verano)
 
-El núcleo del modelo predictivo ya está completamente funcional en el entorno de desarrollo (Jupyter Notebook). El proyecto continúa en desarrollo activo con el foco puesto en las siguientes implementaciones:
+El motor de predicción en el Jupyter Notebook ya funciona perfectamente. Como el objetivo es seguir aprendiendo y llevar este proyecto al siguiente nivel, estas son las mejoras en las que estoy trabajando:
 
-* **Integración con Telegram Bot API:** Creación de una interfaz conversacional para que cualquier usuario pueda consultar predicciones enviando las características de la vivienda por chat.
-* **Modularización y Producción:** Exportación del modelo entrenado a un archivo físico (`.joblib`) y migración de la lógica a scripts independientes de Python (`src/`).
-* **Despliegue y Automatización:** Configuración del script en un entorno de servidor (Linux) para su ejecución 24/7 como servicio en segundo plano, aplicando buenas prácticas de seguridad para la gestión de credenciales (variables de entorno).
+* **Crear un Bot de Telegram:** Quiero que cualquiera pueda usar el modelo desde el móvil. La idea es pasarle los datos de una casa por el chat y que el bot te devuelva el precio estimado al instante.
+* **Limpar y organizar el código:** Pasar la lógica del Notebook a archivos limpios de Python (`.py`) y guardar el modelo ya entrenado en un archivo para que el bot lo cargue superrápido sin tener que reentrenarlo cada vez.
+* **Montarlo en un servidor (Linux):** Desplegar el script del bot en un servidor para que se quede corriendo en segundo plano y funcione las 24 horas del día, aplicando buenas prácticas para ocultar las claves de la API de Telegram de forma segura.
+  
 ## El Problema de Negocio (Sector Inmobiliario)
 
 El ejercicio se basa en un caso real del sector inmobiliario. Contamos con una tabla de datos (dataset) que incluye información de muchas viviendas: su ubicación por coordenadas, la antigüedad del edificio, el número de habitaciones, los dormitorios y el nivel económico de los vecinos de la zona. 
