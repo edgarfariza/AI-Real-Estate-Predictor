@@ -1,4 +1,4 @@
-# AI Real State Predictor
+# AI Real Estate Predictor
 
 ![Status](https://img.shields.io/badge/Status-In_Development-orange?style=flat-square)
 
@@ -24,8 +24,8 @@ Para realizar este proyecto he trabajado en la nube de Amazon Web Services (AWS)
 ## Cómo ejecutarlo localmente
 
 ```bash
-git clone https://github.com/edgarfariza/AI-Real-State-Agent.git
-cd AI-Real-State-Agent
+git clone https://github.com/edgarfariza/AI-Real-Estate-Agent.git
+cd AI-Real-Estate-Agent
 pip install -r requirements.txt
 jupyter notebook notebook/prediccion_viviendas.ipynb
 ```
