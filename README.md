@@ -29,6 +29,14 @@ cd AI-Real-State-Agent
 pip install -r requirements.txt
 jupyter notebook notebook/prediccion_viviendas.ipynb
 ```
+
+## Próximos Pasos
+
+El núcleo del modelo predictivo ya está completamente funcional en el entorno de desarrollo (Jupyter Notebook). El proyecto continúa en desarrollo activo con el foco puesto en las siguientes implementaciones:
+
+* **Integración con Telegram Bot API:** Creación de una interfaz conversacional para que cualquier usuario pueda consultar predicciones enviando las características de la vivienda por chat.
+* **Modularización y Producción:** Exportación del modelo entrenado a un archivo físico (`.joblib`) y migración de la lógica a scripts independientes de Python (`src/`).
+* **Despliegue y Automatización:** Configuración del script en un entorno de servidor (Linux) para su ejecución 24/7 como servicio en segundo plano, aplicando buenas prácticas de seguridad para la gestión de credenciales (variables de entorno).
 ## El Problema de Negocio (Sector Inmobiliario)
 
 El ejercicio se basa en un caso real del sector inmobiliario. Contamos con una tabla de datos (dataset) que incluye información de muchas viviendas: su ubicación por coordenadas, la antigüedad del edificio, el número de habitaciones, los dormitorios y el nivel económico de los vecinos de la zona. 
