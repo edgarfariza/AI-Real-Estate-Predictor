@@ -36,6 +36,9 @@ Tener un modelo que calcule los precios de forma automática permite a una inmob
 ### 1. Bloqueo de Permisos y Cambio de Estrategia
 Al intentar abrir la herramienta visual SageMaker Canvas dentro del laboratorio de la universidad, el sistema me denegó el acceso con un error de tipo `AccessDeniedException`. Esto ocurrió porque las cuentas de estudiante vienen muy limitadas de fábrica y no tienen permisos para activar ciertas opciones de usuario en AWS (como el Identity Center o el Resource Access Manager).
 
+![AccesDeniedException1](img/AccesssDeniedException.png)
+![AccessDeniedException2](img/AccessDeniedException2.png)
+
 Como no podía cambiar los permisos de la cuenta, decidí solucionar el problema como programador: en lugar de usar la interfaz visual sin código, creé una **Instancia de Cuaderno tradicional (Notebook Instance)** de tipo `ml.t3.medium` usando el rol con los permisos que ya venían configurados en el laboratorio (`LabRole`). Esta vía trabaja de forma independiente, esquiva el bloqueo y me permitió continuar con el proyecto escribiendo el código yo mismo.
 
 ![Instancia de Cuaderno Activa](img/01-instancia-cuaderno.png)
@@ -96,7 +99,7 @@ print("¡Modelo entrenado con éxito usando los datos del taller!")
 Para comprobar si el sistema había aprendido correctamente, le pasé las casas del grupo de examen (el 20%) para que intentara calcular sus precios sin ver la solución. Al comparar sus predicciones con los precios reales del mercado, el script calculó las dos notas de rendimiento finales:
 
 * **Error Cuadrático Medio (MSE):** Mide la media de los fallos del modelo elevados al cuadrado. Cuanto más bajo sea este valor, más cerca habrán estado las predicciones de los precios reales.
-* **Coeficiente de Determinación (R2 Score):** Es la nota de examen del modelo en una escala del 0 al 1. Nuestro script devuelve un valor de **0.6400**, lo que significa que este código en Python tiene un **64% de acierto general** a la hora de estimar el valor de las viviendas utilizando los datos del taller de AWS.
+* **Coeficiente de Determinación (R2 Score):** Es la nota de examen del modelo en una escala del 0 al 1. Nuestro script devuelve un valor de **0.6401**, lo que significa que este código en Python tiene un **64% de acierto general** a la hora de estimar el valor de las viviendas utilizando los datos del taller de AWS.
 
 ```python
 from sklearn.metrics import mean_squared_error, r2_score
@@ -159,8 +162,6 @@ Para cumplir con las buenas prácticas de administración en la nube, optimizar 
 
 ![Instancia del cuaderno parada](img/05-instancia-stopped.png)
 
-## Reflexión Final y Aprendizajes
-
 ## Reflexión Final, Aprendizajes y Aplicación Empresarial
 
 ### 1. Limitaciones de las Herramientas Visuales frente al Código
@@ -169,7 +170,7 @@ Este proyecto me ha servido para comprobar que las herramientas visuales sin có
 ### 2. Investigación de Conceptos de Machine Learning
 Al cambiar de estrategia y pasar a desarrollar la solución en Python, me tocó investigar conceptos técnicos que no habíamos visto en el curso:
 
-* **El Algoritmo de Regresión Lineal:** Entendí que no es magia negra, sino un algoritmo clásico que analiza variables numéricas de entrada y traza de forma automática una línea recta de tendencia para calcular el precio final de una casa. Conseguir un 64% de acierto (`R2 Score: 0.6400`) con un dataset real de más de 20.000 viviendas demuestra que los datos tienen una lógica interna que la IA puede aprender rápidamente.
+* **El Algoritmo de Regresión Lineal:** Entendí que no es magia negra, sino un algoritmo clásico que analiza variables numéricas de entrada y traza de forma automática una línea recta de tendencia para calcular el precio final de una casa. Conseguir un 64% de acierto (`R2 Score: 0.6401`) con un dataset real de más de 20.000 viviendas demuestra que los datos tienen una lógica interna que la IA puede aprender rápidamente.
 * **Métricas de Evaluación:** Para saber si el modelo funcionaba bien o mal, investigué qué significaban el Error Cuadrático Medio (MSE), que calcula la media de los fallos elevados al cuadrado, y el Coeficiente de Determinación (R2 Score), que funciona como la nota del examen del algoritmo. 
 * **Ecosistema de Librerías de Python:** Al venir de programar en Java, tuve que investigar herramientas nuevas de análisis de datos como `pandas` (para limpiar celdas vacías mediante `dropna()`), `seaborn` y `matplotlib` (para las gráficas) y `scikit-learn` (para instanciar el modelo como un objeto y usar métodos como `.fit()` y `.predict()`).
 
