@@ -1,62 +1,61 @@
-# AI-Real-State-Agent
-# Predicción de precios para Real State con Amazon SageMaker Canvas
+# AI Real Estate Agent
+# Predicción de precios de viviendas con Amazon SageMaker
 
-Este proyecto ha sido desarrollado como parte de la Especialización en Cloud Computing. Consiste en la implementación de una solución de Machine Learning no-code mediante la plataforma Amazon SageMaker Canvas, orientada a la predicción de precios en el sector inmobiliario a partir de variables sociodemográficas, económicas y geográficas.
+Este proyecto forma parte de mi formación en Cloud Computing. El objetivo inicial era utilizar Amazon SageMaker Canvas, una herramienta visual que permite crear modelos de Inteligencia Artificial sin escribir código, para adivinar el precio de las viviendas en función de sus características (como el número de habitaciones o la zona donde se encuentran). 
 
-El objetivo de este repositorio es documentar el despliegue de la infraestructura en AWS, el análisis técnico del modelo de regresión y las conclusiones de su aplicación en el entorno empresarial.
+El propósito de este repositorio es explicar los problemas que encontré con los permisos de la cuenta de AWS, cómo los solucioné cambiando de estrategia y el código que utilicé para crear el modelo definitivo.
 
 ---
 
-## Infraestructura y Servicio Cloud Utilizado
+## Servicios de la Nube Utilizados
 
-Para la resolución de este proyecto se ha configurado el ecosistema de Amazon Web Services (AWS), utilizando los siguientes componentes:
+Para realizar este proyecto he trabajado en la nube de Amazon Web Services (AWS) utilizando las siguientes herramientas:
 
-* **Amazon SageMaker Domain:** Configuración del entorno de ejecución aislado y gestión de roles de ejecución de AWS IAM para asegurar el control de accesos y permisos.
-* **Amazon SageMaker Canvas:** Servicio visual e intuitivo diseñado para crear y desplegar modelos de Machine Learning sin necesidad de escribir código (no-code). Esta herramienta facilita el acceso a la Inteligencia Artificial permitiendo generar predicciones precisas basadas en datos históricos.
-* **Amazon S3:** Almacenamiento subyacente para la ingesta y persistencia de los conjuntos de datos.
+* **Amazon SageMaker:** La plataforma principal de AWS para trabajar con Inteligencia Artificial y modelos predictivos.
+* **Instancias de Cuaderno (Notebook Instances):** Servidores virtuales dedicados que permiten abrir el entorno JupyterLab para escribir e instalar scripts en Python de forma aislada y segura.
+* **Amazon S3:** El servicio de almacenamiento en la nube donde se guardan los archivos de datos utilizados.
 
 ---
 
 ## El Problema de Negocio (Sector Inmobiliario)
 
-El caso de uso se centra en el sector inmobiliario. El objetivo principal es la predicción del valor de las viviendas a partir de un conjunto de datos que incluye múltiples variables sociodemográficas y geográficas, tales como la ubicación, la antigüedad de la vivienda, el número de habitaciones y los ingresos medios de la zona.
+El ejercicio se basa en un caso real del sector inmobiliario. Contamos con una tabla de datos (dataset) que incluye información de muchas viviendas: su ubicación, los años que tiene el edificio, cuántas habitaciones tiene y el nivel económico de los vecinos de la zona. 
 
-Para ello, se ha construido un modelo predictivo de regresión numérica, el cual analiza las relaciones entre las variables independientes para estimar un resultado cuantitativo y continuo. Los datos, extraídos del workshop de AWS, incluyen tanto las características físicas de los inmuebles como los factores socioeconómicos del entorno. El parámetro configurado para ser predicho por el modelo es el valor económico de la vivienda, buscando determinar cómo varía dicho precio al alterar el resto de las variables del dataset.
+El objetivo es entrenar al sistema para que aprenda la relación que hay entre todos esos datos y sea capaz de calcular, de forma automática, el precio de una casa. 
 
-### Valor para el Negocio:
-Para una empresa del sector inmobiliario, disponer de este modelo tiene una utilidad crítica puesto que permite:
-* Automatizar la tasación inicial de inmuebles.
-* Identificar propiedades infravaloradas en el mercado para su adquisición.
-* Ajustar los precios de venta basándose en el comportamiento real de los datos en lugar de en la intuición.
+### Utilidad para una Empresa:
+Tener un modelo que calcule los precios de forma automática permite a una inmobiliaria:
+* Tasar los pisos mucho más rápido nada más entrar en la cartera.
+* Encontrar chollos o casas que están a la venta por debajo del precio real del mercado.
+* Poner precios de venta basados en estadísticas reales y no en una simple intuición.
 
 ---
 
 ## Desarrollo Paso a Paso
 
-### 1. Configuración del Entorno y Resolución de Restricciones (Pivote Técnico)
-Durante la fase inicial del proyecto en la consola de Amazon SageMaker, se intentó configurar un dominio para utilizar la herramienta visual no-code SageMaker Canvas. Sin embargo, el entorno de la cuenta académica bloqueó el acceso lanzando una excepción de tipo `AccessDeniedException` debido a la falta de permisos en la acción `sso:CreateInstance` del servicio IAM Identity Center y restricciones internas de AWS Resource Access Manager (RAM).
+### 1. Bloqueo de Permisos y Cambio de Estrategia
+Al intentar abrir la herramienta visual SageMaker Canvas dentro del laboratorio de la universidad, el sistema me denegó el acceso con un error de tipo `AccessDeniedException`. Esto ocurrió porque las cuentas de estudiante vienen muy limitadas de fábrica y no tienen permisos para activar ciertas opciones de usuario en AWS (como el Identity Center o el Resource Access Manager).
 
-Ante la imposibilidad de modificar las políticas de seguridad de la cuenta de estudiante, se tomó la decisión técnica de cambiar la estrategia. En lugar de utilizar la interfaz visual, se procedió a aprovisionar una **Instancia de Cuaderno de SageMaker (Notebook Instance)** aislada con la configuración `ml.t3.medium` y heredando el rol de ejecución preexistente (`LabRole`). Esta vía de desarrollo tradicional por código no requiere el uso de los servicios bloqueados, permitiendo continuar con el objetivo de negocio.
+Como no podía cambiar los permisos de la cuenta, decidí solucionar el problema como programador: en lugar de usar la interfaz visual sin código, creé una **Instancia de Cuaderno tradicional (Notebook Instance)** de tipo `ml.t3.medium` usando el rol con los permisos que ya venían configurados en el laboratorio (`LabRole`). Esta vía trabaja de forma independiente, esquiva el bloqueo y me permitió continuar con el proyecto escribiendo el código yo mismo.
 
 ![Instancia de Cuaderno Activa](img/01-instancia-cuaderno.png)
 
-### 2. Ingesta de Datos y Análisis Exploratorio (EDA)
-Una vez dentro del entorno de JupyterLab, se inicializó un cuaderno de Python 3 y se procedió a importar el dataset inmobiliario. Mediante el uso de la librería `seaborn`, se generó una matriz de correlación para analizar de forma estadística el impacto de las variables independientes (como los ingresos medios de la zona o el número de habitaciones) sobre la variable objetivo, que es el valor económico de la vivienda.
+### 2. Carga de Datos y Gráfica de Relaciones
+Una vez dentro de JupyterLab, abrí un archivo nuevo de Python 3 y cargué la tabla con los datos de las viviendas. Para entender mejor la información antes de entrenar al sistema, utilicé una librería gráfica llamada `seaborn` para pintar un mapa de calor. Esta gráfica muestra de forma visual qué características influyen más en que una casa sea más cara o más barata (por ejemplo, si influye más el sueldo de la zona o el número de habitaciones).
 
 ```python
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-# Carga e inspección inicial del dataset
+# Carga de los datos de las viviendas
 from sklearn.datasets import fetch_california_housing
 housing = fetch_california_housing(as_frame=True)
 df = housing.frame
 
-# Generación del mapa de calor de correlaciones
+# Creación de la gráfica de relaciones
 plt.figure(figsize=(10, 6))
 sns.heatmap(df.corr(), annot=True, cmap='Dark2', fmt='.2f')
 plt.title('Matriz de Correlación de Variables Inmobiliarias')
 plt.show()
-
 
