@@ -1,5 +1,9 @@
-# AI Real State Predictor
+# AI Real Estate Predictor
+
+![Status](https://img.shields.io/badge/Status-In_Development-orange?style=flat-square)
+
 # Predicción de precios de viviendas con Amazon SageMaker
+
 
 Este proyecto forma parte de mi formación en Cloud Computing. El objetivo inicial era utilizar Amazon SageMaker Canvas, una herramienta visual que permite crear modelos de Inteligencia Artificial sin escribir código, para adivinar el precio de las viviendas en función de sus características (como el número de habitaciones o la zona donde se encuentran). 
 
