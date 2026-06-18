@@ -149,4 +149,22 @@ Al ver que la nube de puntos azules se agrupa siguiendo la dirección de la lín
 Esta gráfica nos muestra cuanto se desvían las predicciones del modelo respecto a la línea roja discontinua central, que representa el cero.
 La gráfica tiene forma de campana y la mayoría de los datos se concentran alrededor de la línea central. Esto es una excelente señal técnica, ya que demuestra que la gran mayoría de los errores del algoritmo son pequeños (cercanos a cero) y que el modelo no tiene un sesgo grave que le haga calcular siempre los precios al alza o a la baja.
 
+## Reflexión Final y Aprendizajes
+
+### 1. Limitaciones de las Herramientas Visuales
+Este proyecto me ha servido para comprobar que las herramientas visuales sin código (como Canvas) son muy cómodas y rápidas para un análisis inicial, pero dependen demasiado de tener todos los permisos de infraestructura abiertos en la nube. Al final, tener una base sólida de programación y saber defenderme con scripts me ha permitido salvar el proyecto de forma independiente, levantando una solución idéntica escribiendo el código a mano.
+
+### 2. Investigación de Conceptos de Machine Learning
+Al cambiar de estrategia y pasar de una interfaz visual a picar código en Python, me tocó investigar conceptos técnicos que no habíamos visto en primero de DAM:
+
+* **El Algoritmo de Regresión Lineal:** Tuve que aprender cómo funciona este modelo clásico. Entendí que no es magia negra, sino un algoritmo que analiza variables numéricas de entrada (ingresos, habitaciones, ubicación) y traza de forma automática una línea recta de tendencia para calcular el precio final de una casa.
+* **Métricas de Evaluación:** Para saber si el modelo funcionaba bien o mal, investigué qué significaban el Error Cuadrático Medio (MSE), que calcula la media de los fallos elevados al cuadrado, y el Coeficiente de Determinación (R2 Score), que funciona como la nota del examen del algoritmo. Descubrir que mi modelo sacó un 0.6400 (un 64% de acierto general) me ayudó a entender cómo validar la calidad de una Inteligencia Artificial.
+* **Ecosistema de Librerías de Python:** Al venir de programar en Java, tuve que investigar y aprender a usar herramientas nuevas de análisis de datos:
+  * `pandas`: Para cargar el archivo `housing.csv`, inspeccionar sus columnas y limpiar los datos eliminando las celdas vacías (`dropna()`) para que el código no fallara.
+  * `seaborn` y `matplotlib`: Para programar desde cero el mapa de calor de las correlaciones y las gráficas finales de comparativa y distribución de errores.
+  * `scikit-learn`: Para entender cómo instanciar el modelo de regresión como un objeto y usar sus métodos nativos como `.fit()` para entrenarlo y `.predict()` para evaluarlo.
+
+### 3. Conclusión sobre el Perfil Profesional
+Como alumno de primero de DAM que busca construir un perfil híbrido enfocado en Cloud, Sistemas y Automatización, este laboratorio ha sido un reto enorme pero muy enriquecedor. Me ha demostrado que la frontera entre el desarrollo de software puro y la Inteligencia Artificial se está uniendo, y que saber orquestar datos mediante scripts de Python es una habilidad clave para desplegar arquitecturas eficientes en cualquier entorno cloud.
+
 
