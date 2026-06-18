@@ -62,3 +62,5 @@ plt.figure(figsize=(10, 6))
 sns.heatmap(df.corr(numeric_only=True), annot=True, cmap='Dark2', fmt='.2f')
 plt.title('Matriz de Correlación - Dataset Oficial de AWS')
 plt.show()
+```
+![Matriz de Correlación](img/02-grafico-dataset  .png)
