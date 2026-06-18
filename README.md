@@ -30,7 +30,7 @@ pip install -r requirements.txt
 jupyter notebook notebook/prediccion_viviendas.ipynb
 ```
 
-## 🚀 Próximos Pasos (Lo que se viene este verano)
+## Próximos Pasos (Lo que se viene este verano)
 
 El motor de predicción en el Jupyter Notebook ya funciona perfectamente. Como el objetivo es seguir aprendiendo y llevar este proyecto al siguiente nivel, estas son las mejoras en las que estoy trabajando:
 
