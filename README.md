@@ -1,4 +1,4 @@
-# AI Real Estate Predictor
+# AI Real State Predictor
 
 ![Status](https://img.shields.io/badge/Status-In_Development-orange?style=flat-square)
 
