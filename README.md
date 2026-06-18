@@ -161,20 +161,24 @@ Para cumplir con las buenas prácticas de administración en la nube, optimizar 
 
 ## Reflexión Final y Aprendizajes
 
-### 1. Limitaciones de las Herramientas Visuales
-Este proyecto me ha servido para comprobar que las herramientas visuales sin código (como Canvas) son muy cómodas y rápidas para un análisis inicial, pero dependen demasiado de tener todos los permisos de infraestructura abiertos en la nube. Al final, tener una base sólida de programación y saber defenderme con scripts me ha permitido salvar el proyecto de forma independiente, levantando una solución idéntica escribiendo el código a mano.
+## Reflexión Final, Aprendizajes y Aplicación Empresarial
+
+### 1. Limitaciones de las Herramientas Visuales frente al Código
+Este proyecto me ha servido para comprobar que las herramientas visuales sin código (como Canvas) son muy cómodas y rápidas para un análisis inicial, pero dependen demasiado de tener todos los permisos de infraestructura abiertos en la nube. Al final, tener una base sólida de programación en primero de DAM y saber defenderme con scripts me ha permitido salvar el proyecto de forma independiente, levantando una solución idéntica escribiendo el código a mano mediante una Instancia de Cuaderno tradicional de SageMaker. Esto demuestra que un bloqueo de permisos en la nube (`AccessDeniedException`) no detiene el proyecto si se tiene flexibilidad y capacidad para resolver problemas escribiendo código.
 
 ### 2. Investigación de Conceptos de Machine Learning
-Al cambiar de estrategia y pasar de una interfaz visual a picar código en Python, me tocó investigar conceptos técnicos que no habíamos visto en primero de DAM:
+Al cambiar de estrategia y pasar a desarrollar la solución en Python, me tocó investigar conceptos técnicos que no habíamos visto en el curso:
 
-* **El Algoritmo de Regresión Lineal:** Tuve que aprender cómo funciona este modelo clásico. Entendí que no es magia negra, sino un algoritmo que analiza variables numéricas de entrada (ingresos, habitaciones, ubicación) y traza de forma automática una línea recta de tendencia para calcular el precio final de una casa.
-* **Métricas de Evaluación:** Para saber si el modelo funcionaba bien o mal, investigué qué significaban el Error Cuadrático Medio (MSE), que calcula la media de los fallos elevados al cuadrado, y el Coeficiente de Determinación (R2 Score), que funciona como la nota del examen del algoritmo. Descubrir que mi modelo sacó un 0.6400 (un 64% de acierto general) me ayudó a entender cómo validar la calidad de una Inteligencia Artificial.
-* **Ecosistema de Librerías de Python:** Al venir de programar en Java, tuve que investigar y aprender a usar herramientas nuevas de análisis de datos:
-  * `pandas`: Para cargar el archivo `housing.csv`, inspeccionar sus columnas y limpiar los datos eliminando las celdas vacías (`dropna()`) para que el código no fallara.
-  * `seaborn` y `matplotlib`: Para programar desde cero el mapa de calor de las correlaciones y las gráficas finales de comparativa y distribución de errores.
-  * `scikit-learn`: Para entender cómo instanciar el modelo de regresión como un objeto y usar sus métodos nativos como `.fit()` para entrenarlo y `.predict()` para evaluarlo.
+* **El Algoritmo de Regresión Lineal:** Entendí que no es magia negra, sino un algoritmo clásico que analiza variables numéricas de entrada y traza de forma automática una línea recta de tendencia para calcular el precio final de una casa. Conseguir un 64% de acierto (`R2 Score: 0.6400`) con un dataset real de más de 20.000 viviendas demuestra que los datos tienen una lógica interna que la IA puede aprender rápidamente.
+* **Métricas de Evaluación:** Para saber si el modelo funcionaba bien o mal, investigué qué significaban el Error Cuadrático Medio (MSE), que calcula la media de los fallos elevados al cuadrado, y el Coeficiente de Determinación (R2 Score), que funciona como la nota del examen del algoritmo. 
+* **Ecosistema de Librerías de Python:** Al venir de programar en Java, tuve que investigar herramientas nuevas de análisis de datos como `pandas` (para limpiar celdas vacías mediante `dropna()`), `seaborn` y `matplotlib` (para las gráficas) y `scikit-learn` (para instanciar el modelo como un objeto y usar métodos como `.fit()` y `.predict()`).
 
-### 3. Conclusión sobre el Perfil Profesional
-Como alumno de primero de DAM que busca construir un perfil híbrido enfocado en Cloud, Sistemas y Automatización, este laboratorio ha sido un reto enorme pero muy enriquecedor. Me ha demostrado que la frontera entre el desarrollo de software puro y la Inteligencia Artificial se está uniendo, y que saber orquestar datos mediante scripts de Python es una habilidad clave para desplegar arquitecturas eficientes en cualquier entorno cloud.
+### 3. Limitaciones del Modelo Técnico
+Como desarrollador, es importante entender los límites de lo que hemos construido. La regresión lineal traza una línea recta de tendencia, pero el mercado inmobiliario real es mucho más complejo y rara vez se comporta de forma lineal. Para subir la precisión en el futuro, habría que investigar algoritmos basados en árboles de decisión. Además, el dataset analiza factores fijos, pero no tiene en cuenta variables del mundo real que cambian constantemente, como el estado de conservación de la vivienda, las reformas recientes, la inflación o los tipos de interés.
 
+### 4. Aplicación en el Entorno Empresarial (Valor de Negocio)
+Si tuviéramos que implantar este sistema en una empresa inmobiliaria real, su aplicación práctica generaría un impacto inmediato en el negocio mediante dos estrategias claras:
+
+* **Filtro Rápido de Oportunidades (Inversión):** El departamento de compras podría programar este script para escanear de forma automática portales inmobiliarios. Si el sistema detecta un piso cuyo precio de venta real está muy por debajo del precio que predice nuestro modelo, saltaría una alerta automática para adquirir una propiedad infravalorada antes que la competencia.
+* **Tasación Automatizada para Captación de Clientes:** Se podría integrar este código detrás de una API web en la página de la inmobiliaria. De este modo, un usuario de la calle podría rellenar un formulario con los datos de su casa y el sistema le devolvería una tasación inicial aproximada en segundos, capturando un cliente potencial para la empresa de forma automatizada gracias a la infraestructura cloud.
 
