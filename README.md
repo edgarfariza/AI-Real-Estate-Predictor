@@ -31,4 +31,32 @@ Para una empresa del sector inmobiliario, disponer de este modelo tiene una util
 
 ---
 
+## Desarrollo Paso a Paso
+
+### 1. Configuración del Entorno y Resolución de Restricciones (Pivote Técnico)
+Durante la fase inicial del proyecto en la consola de Amazon SageMaker, se intentó configurar un dominio para utilizar la herramienta visual no-code SageMaker Canvas. Sin embargo, el entorno de la cuenta académica bloqueó el acceso lanzando una excepción de tipo `AccessDeniedException` debido a la falta de permisos en la acción `sso:CreateInstance` del servicio IAM Identity Center y restricciones internas de AWS Resource Access Manager (RAM).
+
+Ante la imposibilidad de modificar las políticas de seguridad de la cuenta de estudiante, se tomó la decisión técnica de cambiar la estrategia. En lugar de utilizar la interfaz visual, se procedió a aprovisionar una **Instancia de Cuaderno de SageMaker (Notebook Instance)** aislada con la configuración `ml.t3.medium` y heredando el rol de ejecución preexistente (`LabRole`). Esta vía de desarrollo tradicional por código no requiere el uso de los servicios bloqueados, permitiendo continuar con el objetivo de negocio.
+
+![Instancia de Cuaderno Activa](img/01-instancia-cuaderno.png)
+
+### 2. Ingesta de Datos y Análisis Exploratorio (EDA)
+Una vez dentro del entorno de JupyterLab, se inicializó un cuaderno de Python 3 y se procedió a importar el dataset inmobiliario. Mediante el uso de la librería `seaborn`, se generó una matriz de correlación para analizar de forma estadística el impacto de las variables independientes (como los ingresos medios de la zona o el número de habitaciones) sobre la variable objetivo, que es el valor económico de la vivienda.
+
+```python
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Carga e inspección inicial del dataset
+from sklearn.datasets import fetch_california_housing
+housing = fetch_california_housing(as_frame=True)
+df = housing.frame
+
+# Generación del mapa de calor de correlaciones
+plt.figure(figsize=(10, 6))
+sns.heatmap(df.corr(), annot=True, cmap='Dark2', fmt='.2f')
+plt.title('Matriz de Correlación de Variables Inmobiliarias')
+plt.show()
+
 
