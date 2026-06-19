@@ -196,7 +196,7 @@ Si tuviéramos que implantar este sistema en una empresa inmobiliaria real, su a
 
 ---
 
-## Próximos Pasos (Lo que se viene este verano)
+## Próximos Pasos 
 
 El motor de predicción en el Jupyter Notebook ya funciona perfectamente. Como el objetivo es seguir aprendiendo y llevar este proyecto al siguiente nivel, estas son las mejoras en las que estoy trabajando:
 
